@@ -1,0 +1,124 @@
+from es6.Object import Object
+from es6.Symbol import Symbol
+from es6.WeakMap import WeakMap
+from types import MappingProxyType
+
+__DEV__ = True
+
+maxMarkerBits = 30
+
+
+TrackOpTypes = Object({
+    "GET": 'get',
+    "HAS": 'has',
+    "ITERATE": 'iterate'
+})
+
+TriggerOpTypes = Object({
+    "SET": 'set',
+    "ADD": 'add',
+    "DELETE": 'delete',
+    "CLEAR": 'clear'
+})
+
+ReactiveFlags = Object({
+    "SKIP": '__v_skip',
+    "IS_REACTIVE": '__v_isReactive',
+    "IS_READONLY": '__v_isReadonly',
+    "IS_SHALLOW": '__v_isShallow',
+    "RAW": '__v_raw'
+})
+
+reactiveMap = WeakMap()  # WeakMap<Target, any>
+shallowReactiveMap = WeakMap()  # WeakMap<Target, any>
+readonlyMap = WeakMap()  # WeakMap<Target, any>
+shallowReadonlyMap = WeakMap()  # WeakMap<Target, any>
+
+ITERATE_KEY = Symbol('iterate' if __DEV__ else '')
+
+MAP_KEY_ITERATE_KEY = Symbol('Map key iterate' if __DEV__ else '')
+
+TargetType = Object({
+    "INVALID": 0,
+    "COMMON": 1,
+    "COLLECTION": 2
+})
+
+EMPTY_OBJ = MappingProxyType({}) if __DEV__ else {}
+
+ErrorCodes = Object({"SETUP_FUNCTION": 'SETUP_FUNCTION',
+                     "RENDER_FUNCTION": "RENDER_FUNCTION",
+                     'WATCH_GETTER': 'WATCH_GETTER',
+                     'WATCH_CALLBACK': 'WATCH_CALLBACK',
+                     'WATCH_CLEANUP': 'WATCH_CLEANUP',
+                     'NATIVE_EVENT_HANDLER': 'NATIVE_EVENT_HANDLER',
+                     'COMPONENT_EVENT_HANDLER': 'COMPONENT_EVENT_HANDLER',
+                     'VNODE_HOOK': 'VNODE_HOOK',
+                     'DIRECTIVE_HOOK': 'DIRECTIVE_HOOK',
+                     'TRANSITION_HOOK': 'TRANSITION_HOOK',
+                     'APP_ERROR_HANDLER': 'APP_ERROR_HANDLER',
+                     'APP_WARN_HANDLER': 'APP_WARN_HANDLER',
+                     'FUNCTION_REF': 'FUNCTION_REF',
+                     'ASYNC_COMPONENT_LOADER': 'ASYNC_COMPONENT_LOADER',
+                     'SCHEDULER': 'SCHEDULER'})
+
+
+INITIAL_WATCHER_VALUE = Object({})
+
+DeprecationTypes = Object({
+    'GLOBAL_MOUNT': 'GLOBAL_MOUNT',
+    'GLOBAL_MOUNT_CONTAINER': 'GLOBAL_MOUNT_CONTAINER',
+    'GLOBAL_EXTEND': 'GLOBAL_EXTEND',
+    'GLOBAL_PROTOTYPE': 'GLOBAL_PROTOTYPE',
+    'GLOBAL_SET': 'GLOBAL_SET',
+    'GLOBAL_DELETE': 'GLOBAL_DELETE',
+    'GLOBAL_OBSERVABLE': 'GLOBAL_OBSERVABLE',
+    'GLOBAL_PRIVATE_UTIL': 'GLOBAL_PRIVATE_UTIL',
+
+    'CONFIG_SILENT': 'CONFIG_SILENT',
+    'CONFIG_DEVTOOLS': 'CONFIG_DEVTOOLS',
+    'CONFIG_KEY_CODES': 'CONFIG_KEY_CODES',
+    'CONFIG_PRODUCTION_TIP': 'CONFIG_PRODUCTION_TIP',
+    'CONFIG_IGNORED_ELEMENTS': 'CONFIG_IGNORED_ELEMENTS',
+    'CONFIG_WHITESPACE': 'CONFIG_WHITESPACE',
+    'CONFIG_OPTION_MERGE_STRATS': 'CONFIG_OPTION_MERGE_STRATS',
+
+    'INSTANCE_SET': 'INSTANCE_SET',
+    'INSTANCE_DELETE': 'INSTANCE_DELETE',
+    'INSTANCE_DESTROY': 'INSTANCE_DESTROY',
+    'INSTANCE_EVENT_EMITTER': 'INSTANCE_EVENT_EMITTER',
+    'INSTANCE_EVENT_HOOKS': 'INSTANCE_EVENT_HOOKS',
+    'INSTANCE_CHILDREN': 'INSTANCE_CHILDREN',
+    'INSTANCE_LISTENERS': 'INSTANCE_LISTENERS',
+    'INSTANCE_SCOPED_SLOTS': 'INSTANCE_SCOPED_SLOTS',
+    'INSTANCE_ATTRS_CLASS_STYLE': 'INSTANCE_ATTRS_CLASS_STYLE',
+
+    'OPTIONS_DATA_FN': 'OPTIONS_DATA_FN',
+    'OPTIONS_DATA_MERGE': 'OPTIONS_DATA_MERGE',
+    'OPTIONS_BEFORE_DESTROY': 'OPTIONS_BEFORE_DESTROY',
+    'OPTIONS_DESTROYED': 'OPTIONS_DESTROYED',
+
+    'WATCH_ARRAY': 'WATCH_ARRAY',
+    'PROPS_DEFAULT_THIS': 'PROPS_DEFAULT_THIS',
+
+    'V_ON_KEYCODE_MODIFIER': 'V_ON_KEYCODE_MODIFIER',
+    'CUSTOM_DIR': 'CUSTOM_DIR',
+
+    'ATTR_FALSE_VALUE': 'ATTR_FALSE_VALUE',
+    'ATTR_ENUMERATED_COERCION': 'ATTR_ENUMERATED_COERCION',
+
+    'TRANSITION_CLASSES': 'TRANSITION_CLASSES',
+    'TRANSITION_GROUP_ROOT': 'TRANSITION_GROUP_ROOT',
+
+    'COMPONENT_ASYNC': 'COMPONENT_ASYNC',
+    'COMPONENT_FUNCTIONAL': 'COMPONENT_FUNCTIONAL',
+    'COMPONENT_V_MODEL': 'COMPONENT_V_MODEL',
+
+    'RENDER_FUNCTION': 'RENDER_FUNCTION',
+
+    'FILTERS': 'FILTERS',
+
+    'PRIVATE_APIS': 'PRIVATE_APIS'
+})
+
+MAX_SAFE_INTEGER = 9007199254740991
